@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,机器学习,KNN," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言第一次比较整体的完成机器学习实践，参考了许多网络资料。要能独立写出来还需要锻炼；python有很多细致的东西还不了解；sklearn与numpy还没有掌握。但的的确确体会到了机器学习的乐趣，期待下一次的学习 (^v^)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于kNN的手写字识别">
+<meta property="og:url" content="http://yoursite.com/2020/02/10/%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/index.html">
+<meta property="og:site_name" content="TheDay">
+<meta property="og:description" content="前言第一次比较整体的完成机器学习实践，参考了许多网络资料。要能独立写出来还需要锻炼；python有很多细致的东西还不了解；sklearn与numpy还没有掌握。但的的确确体会到了机器学习的乐趣，期待下一次的学习 (^v^)">
+<meta property="og:image" content="http://yoursite.com/2020/02/10/%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/1_kNN_hand_writing.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/02/10/%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/2_kNN_hand_writing.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/10/%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/1_86_7_kNN_hand_writing.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/10/%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/3_kNN_hand_writing.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/10/%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/4_kNN_hand_writing.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/10/%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/5_kNN_hand_writing.png">
+<meta property="article:published_time" content="2020-02-10T13:11:28.000Z">
+<meta property="article:modified_time" content="2020-02-11T09:29:04.000Z">
+<meta property="article:author" content="听闻有雨">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="KNN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/10/%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/1_kNN_hand_writing.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/10/基于kNN的手写字识别/"/>
+
+
+
+
+
+  <title>基于kNN的手写字识别 | TheDay</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/The-Day" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TheDay</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/10/%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="听闻有雨">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lgcj.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TheDay">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于kNN的手写字识别</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-10T21:11:28+08:00">
+                2020-02-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/02/10/%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/02/10/%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>第一次比较整体的完成机器学习实践，参考了许多网络资料。要能独立写出来还需要锻炼；python有很多细致的东西还不了解；sklearn与numpy还没有掌握。但的的确确体会到了机器学习的乐趣，期待下一次的学习 (^v^)</p>
+<a id="more"></a>
+<h2 id="实验介绍"><a href="#实验介绍" class="headerlink" title="实验介绍"></a>实验介绍</h2><h3 id="1-实验内容"><a href="#1-实验内容" class="headerlink" title="1.实验内容"></a>1.实验内容</h3><p>本实验首先使用基于Python实现kNN算法实现手写字识别，然后使用sklearn库的kNN算法实现手写字识别。</p>
+<h3 id="2-实验目标"><a href="#2-实验目标" class="headerlink" title="2.实验目标"></a>2.实验目标</h3><p>通过本实验掌握kNN算法的原理，熟悉kNN算法如何应用在真实世界问题中，同时掌握sklearn机器学习库的使用。</p>
+<h3 id="3-实验知识点"><a href="#3-实验知识点" class="headerlink" title="3.实验知识点"></a>3.实验知识点</h3><ul>
+<li>kNN算法</li>
+<li>sklearn库的使用</li>
+</ul>
+<h3 id="4-实验环境"><a href="#4-实验环境" class="headerlink" title="4.实验环境"></a>4.实验环境</h3><ul>
+<li>python 3.6.5</li>
+<li>sklearn 0.19.1</li>
+<li>CourseGrading在线实验环境</li>
+</ul>
+<h3 id="5-预备知识"><a href="#5-预备知识" class="headerlink" title="5.预备知识"></a>5.预备知识</h3><ul>
+<li>初等数学知识</li>
+<li>Linux命令基本操作</li>
+<li>Python编程基础</li>
+<li>kNN算法原理</li>
+</ul>
+<h2 id="实验原理"><a href="#实验原理" class="headerlink" title="实验原理"></a>实验原理</h2><h3 id="1-kNN算法简介"><a href="#1-kNN算法简介" class="headerlink" title="1.kNN算法简介"></a>1.kNN算法简介</h3><p>　　k近邻法(k-nearest neighbor, kNN)是1967年由Cover T和Hart P提出的一种基本分类与回归方法。它的工作原理是：存在一个样本数据集合，也称作为训练样本集，并且样本集中每个数据都存在标签，即我们知道样本集中每一个数据与所属分类的对应关系。输入没有标签的新数据后，将新的数据的每个特征与样本集中数据对应的特征进行比较，然后算法提取样本最相似数据(最近邻)的分类标签。一般来说，我们只选择样本数据集中前k个最相似的数据，这就是k-近邻算法中k的出处，通常k是不大于20的整数。最后，选择k个最相似数据中出现次数最多的分类，作为新数据的分类。</p>
+<h3 id="2-kNN算法流程"><a href="#2-kNN算法流程" class="headerlink" title="2.kNN算法流程"></a>2.kNN算法流程</h3><p>　　a.计算已知类别数据集中的点与当前点之间的距离；<br>　　b.按照距离递增次序排序；<br>　　c.选取与当前点距离最小的k个点；<br>　　d.确定前k个点所在类别的出现频率；<br>　　e.返回前k个点所出现频率最高的类别作为当前点的预测分类。</p>
+<h3 id="Sklearn简介"><a href="#Sklearn简介" class="headerlink" title="Sklearn简介"></a>Sklearn简介</h3><p>Scikit learn 也简称sklearn，是机器学习领域当中最知名的python模块之一。sklearn包含了很多机器学习的方式：</p>
+<ul>
+<li>Classification 分类</li>
+<li>Regression 回归</li>
+<li>Clustering 非监督分类</li>
+<li>Dimensionality reduction 数据降维</li>
+<li>Model Selection 模型选择</li>
+<li>Preprocessing 数据与处理  </li>
+</ul>
+<p>使用sklearn可以很方便地让我们实现一个机器学习算法。一个复杂度算法的实现，使用sklearn可能只需要调用几行API即可。所以学习sklearn，可以有效减少我们特定任务的实现周期。</p>
+<h2 id="实验准备"><a href="#实验准备" class="headerlink" title="实验准备"></a>实验准备</h2><p>下载<a href="https://pan.baidu.com/s/1zlR1WaaJubuSSApBP1oLjg" target="_blank" rel="noopener">kNN_basic_writing.tgz 提取码：zh0b</a>到指定目录下，然后再依次选择点击上方的File-&gt;Open-&gt;Upload,上传刚才下载的数据集压缩包，再使用如下命令解压：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!tar -zxvf kNN_hand_writing.tgz</span><br></pre></td></tr></table></figure>
+<p>数据集目录下有两个子目录：trainingDigits和testDigits  </p>
+<ul>
+<li>trainingDigits为训练数据集的文件，文件数量为1935；</li>
+<li>testDigits为测试数据集的文件，文件数量为947。</li>
+</ul>
+<p>每个文件的命名格式都为“真实数字_编号.txt”。为了简便处理，实验中，用txt文本文件表示图片。原图片中像素值为黑色（0,0,0）的像素点在txt中对应的用0表示，像素值为白色（255,255,255）的像素点用1表示。所以，只需要处理这些文本文件即可，不用再去解析图片格式。每个txt文件中，数据共有32行和32列，这是由于原图片的大小为32X32。</p>
+<h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><p>现在我们开始基于kNN搭建手写字识别系统，由于数据集已经准备好了，所以省去了机器学习项目流程中的数据收集和数据预处理的工作，直接进入算法设计和实现阶段，即kNN的分类函数。该函数实现完毕后，我们先加载训练集数据，然后验证测试集数据中的数据类别。根据验证结果，得到算法的误差率。<br>接下来的实验步骤将引导你一步一步编写出基于kNN实现的手写字识别系统。首先引入我们系统需要用到的Python的相关库。  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> listdir</span><br></pre></td></tr></table></figure>
+<p>其中，numpy为Python的数值计算扩展库，operator为操作符扩展库，listdir提供了可以查看目录文件列表的函数。</p>
+<h2 id="实现kNN核心算法"><a href="#实现kNN核心算法" class="headerlink" title="实现kNN核心算法"></a>实现kNN核心算法</h2><p>如前所述，kNN算法流程如下：<br>　　a.计算已知类别数据集中的点与当前点之间的距离；<br>　　b.按照距离递增次序排序；<br>　　c.选取与当前点距离最小的k个点；<br>　　d.确定前k个点所在类别的出现频率；<br>　　e.返回前k个点所出现频率最高的类别作为当前点的预测分类。<br>在kNN.py中，添加一个函数classify0作为kNN算法的核心函数，该函数的完整形式为：<br>　　def classify0(inX, dataSet, labels, k):<br>其中各个参数的含义如下:  </p>
+<ul>
+<li>inX - 用于要进行分类判别的数据(来自测试集)</li>
+<li>dataSet - 用于训练的数据(训练集)</li>
+<li>lables - 分类标签</li>
+<li>k - kNN算法参数,选择距离最小的k个点  </li>
+</ul>
+<p>在上述参数列表中，dataSet为所有训练数据的集合，也就是表示所有已知类别数据集中的所有点，dataSet为一个矩阵，其中每一行表示已知类别数据集中的一个点。inX为一个向量，表示当前要判别分类的点。按照上述算法流程，我们首先应该计算inX这个要判别分类的点到dataSet中每个点之间的距离。dataSet中每个点也是用一个向量表示的，点与点之间的距离怎么计算呢？没错，就是求两向量之间的距离，数学上，我们知道有很多距离计算公式，包括但不限于：</p>
+<ul>
+<li>欧氏距离  </li>
+<li>曼哈顿距离  </li>
+<li>切比雪夫距离  </li>
+<li>闵可夫斯基距离</li>
+<li>标准化欧氏距离</li>
+<li>马氏距离  </li>
+<li>夹角余弦  </li>
+<li>汉明距离  </li>
+<li>杰卡德距离&amp; 杰卡德相似系数  </li>
+<li>信息熵</li>
+</ul>
+<p>这里，我们选择最简单的欧式距离计算方法。设p和q为两向量，则两向量间的欧氏距离为：<br><img src="1_kNN_hand_writing.jpg" alt="photo1"></p>
+<h3 id="Exercise-1：实现kNN分类函数（2分）"><a href="#Exercise-1：实现kNN分类函数（2分）" class="headerlink" title="Exercise 1：实现kNN分类函数（2分）"></a>Exercise 1：实现kNN分类函数（2分）</h3><p>在算法流程，输入参数含义，以及距离计算公式都明确了以后，按照kNN算法的流程，我们就可以实现kNN算法了。这里，推荐使用numpy提供的各种功能来实现该算法，相比于自己纯手写各种线性代数变换操作，使用numpy的效率要高的多。</p>
+<p>这是本实验的第一个练习，请根据下述代码中classify0函数的参数，编写实现kNN分类算法的代码。</p>
+<p>提示：距离度量方式可使用欧式距离。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">classify0</span><span class="params">(inX, dataSet, labels, k)</span>:</span></span><br><span class="line">    <span class="comment"># fill your code here</span></span><br><span class="line">    <span class="comment"># 这里我代码分了四部分。</span></span><br><span class="line"><span class="comment"># 一.获得样本数量</span></span><br><span class="line">    dataSetSize = dataSet.shape[<span class="number">0</span>]</span><br><span class="line">    <span class="comment"># print(dataSetSize),在下面的测试中，得到[6,2]</span></span><br><span class="line">    <span class="comment"># shape[0]=6,指的是样本的个数；shape[1]=2，指的是每个样本包含元素的个数</span></span><br><span class="line"><span class="comment"># 二.计算欧式距离</span></span><br><span class="line">    diffMat = np.tile(inX,(dataSetSize,<span class="number">1</span>))-dataSet</span><br><span class="line">    <span class="comment"># tile是numpy中，实现矩阵复制的算法</span></span><br><span class="line">    <span class="comment"># np.tile(inX,(dataSetSize,1))是将inX变成6行1列的矩阵</span></span><br><span class="line">    <span class="comment"># 这里的减法，是矩阵减法，行对行列队列</span></span><br><span class="line">    sqDiffMat = diffMat**<span class="number">2</span></span><br><span class="line">    <span class="comment"># 这里是矩阵的点乘-&gt;乘方，矩阵中每一项的平方</span></span><br><span class="line">    sqDistances = sqDiffMat.sum(axis=<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># sum(axis=1)：矩阵每行相加，最后变成只有一列的矩阵</span></span><br><span class="line">    <span class="comment"># sum(axis=0)：矩阵每列相加，最后变成只有一行的矩阵</span></span><br><span class="line">    <span class="comment"># sum() :      矩阵元素相加，最后只有一个值 </span></span><br><span class="line">    distances = sqDistances**<span class="number">0.5</span></span><br><span class="line">    <span class="comment"># 最后别忘了开方</span></span><br><span class="line"><span class="comment"># 三.从小到大排列</span></span><br><span class="line">    sortedDistances = distances.argsort()</span><br><span class="line">    <span class="comment"># argsort返回的是原始下标排序后的下标序列</span></span><br><span class="line">    classCount = &#123;&#125;</span><br><span class="line">    <span class="comment">#classCount是一个字典</span></span><br><span class="line"><span class="comment"># 四.最低距离前K的labels结果，存放在classCount中</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">        voteIlabel =labels[sortedDistances[i]]</span><br><span class="line">        <span class="comment"># 排名前K的标签</span></span><br><span class="line">        classCount[voteIlabel] = classCount.get(voteIlabel,<span class="number">0</span>)+<span class="number">1</span></span><br><span class="line">        <span class="comment"># 排名时，全部靠后一位，这一部分我还不懂</span></span><br><span class="line">    sortedClassCount = sorted(classCount.items(),key=operator.itemgetter(<span class="number">1</span>),reverse=<span class="literal">True</span>)</span><br><span class="line">    <span class="comment"># sorted升序排序</span></span><br><span class="line">    <span class="keyword">return</span> sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">    <span class="comment"># 返回最近距离对应的标签</span></span><br></pre></td></tr></table></figure>
+<p>classify0函数的完整实现如上所示，计算过程中用到很多numpy的特性。注意argsort返回的是原始下标排序后的下标序列。<br>至此，kNN的算法就已经写完了。接下来，我们用个小例子验证一下kNN算法，随机挑选的6位高中生，分别让他们做文科综合试卷的分数和理科综合试卷的分数，下表为分数以及分类信息。</p>
+<p><img src="2_kNN_hand_writing.png" alt="photo2"></p>
+<p>直觉上，理科生的理综成绩比较高，文综成绩较低，文科生的文综成绩较高，理综成绩较高。基于这些信息，我们利用kNN算法判断成绩为（105,210）所属的分类，代码实现如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dataSet=np.array([[<span class="number">250</span>,<span class="number">100</span>],[<span class="number">270</span>,<span class="number">120</span>],[<span class="number">111</span>,<span class="number">230</span>],[<span class="number">130</span>,<span class="number">260</span>],[<span class="number">200</span>,<span class="number">80</span>],[<span class="number">70</span>,<span class="number">190</span>]])</span><br><span class="line">labels=[<span class="string">"理科生"</span>,<span class="string">"理科生"</span>,<span class="string">"文科生"</span>,<span class="string">"文科生"</span>,<span class="string">"理科生"</span>,<span class="string">"文科生"</span>]</span><br><span class="line">inX=[<span class="number">105</span>,<span class="number">210</span>]</span><br><span class="line">print(classify0(inX,dataSet,labels,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+<p>运行结果如下显示“文科生”，输出结果结果比较符合预期。</p>
+<h2 id="加载手写字训练集数据"><a href="#加载手写字训练集数据" class="headerlink" title="加载手写字训练集数据"></a>加载手写字训练集数据</h2><h3 id="Exercise-2：实现手写数字训练集数据中的单个文件加载函数（4分）"><a href="#Exercise-2：实现手写数字训练集数据中的单个文件加载函数（4分）" class="headerlink" title="Exercise 2：实现手写数字训练集数据中的单个文件加载函数（4分）"></a>Exercise 2：实现手写数字训练集数据中的单个文件加载函数（4分）</h3><p>接下来，我们将加载手写字训练集数据，由于kNN核心算法中，每个点都是用向量表示的。尽管已经转换为文本形式了，不过图片数据依然是32X32的二维数据格式，首先需要将其转换为一维数组，即表示成一个向量。</p>
+<p>以下函数img2vector用于将32X32的二维数组转换为一维数组，该函数传入参数文件名，返回转换后的一维数组。</p>
+<p>请实现img2vector函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">img2vector</span><span class="params">(filename)</span>:</span></span><br><span class="line">    <span class="comment"># fill your code here</span></span><br><span class="line">    resultVector = np.zeros((<span class="number">1</span>, <span class="number">1024</span>))</span><br><span class="line">    fr = open(filename)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">32</span>):</span><br><span class="line">        lineStr = fr.readline()</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">32</span>):</span><br><span class="line">            resultVector[<span class="number">0</span>, <span class="number">32</span> * i + j] = int(lineStr[j])</span><br><span class="line">    <span class="keyword">return</span> resultVector</span><br></pre></td></tr></table></figure>
+<h3 id="Exercise-3：实现所有数据集的加载（4分）"><a href="#Exercise-3：实现所有数据集的加载（4分）" class="headerlink" title="Exercise 3：实现所有数据集的加载（4分）"></a>Exercise 3：实现所有数据集的加载（4分）</h3><p>接下来，我们编写loadTrainingData函数，加载所有训练集数据。</p>
+<p>loadTrainData函数将返回表示训练集数据的矩阵以及每个点对应的分类标签，请实现该函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadTrainData</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># fill your code here</span></span><br><span class="line">    hwLabels = []</span><br><span class="line">    trainFileList = listdir(<span class="string">'kNN_hand_writing/trainingDigits'</span>)  <span class="comment"># 返回的是列表对象</span></span><br><span class="line">    num = len(trainFileList)</span><br><span class="line">    trainingMat = np.zeros((num, <span class="number">1024</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(num):</span><br><span class="line">        fileStr = trainFileList[i]</span><br><span class="line">        </span><br><span class="line">        classNumber = int(fileStr.split(<span class="string">'_'</span>)[<span class="number">0</span>])</span><br><span class="line">         <span class="comment">#split文件，通过识别”_”，将filStr分割，3_45 变成 3 45，再取出第零项，即为标签</span></span><br><span class="line">        </span><br><span class="line">        hwLabels.append(classNumber)</span><br><span class="line">        </span><br><span class="line">        trainingMat[i, :] = img2vector(<span class="string">'kNN_hand_writing/trainingDigits/%s'</span> % (fileStr))</span><br><span class="line">    <span class="keyword">return</span> hwLabels,trainingMat</span><br></pre></td></tr></table></figure>
+<h2 id="使用测试数据集验证分类算法"><a href="#使用测试数据集验证分类算法" class="headerlink" title="使用测试数据集验证分类算法"></a>使用测试数据集验证分类算法</h2><p>最后，我们来验证一下我们的kNN手写字识别算法的准确性，测试使用的数据集位于目录testDigits下。测试的流程为：依次读取testDigits目录下的每个文件，根据文件中的数据，使用分类函数classify0确定其分类，并和其真实分类进行对比，如果一致，表示分类正确，如果不一致，表示分类错误。统计错误的数量，计算错误率，错误率为分类出错的数量除以测试集中测试数据总量。编写kNNHandWrittenTest函数测试基于kNN算法实现的手写字识别系统准确性，该函数的实现代码如下图所示。第46行的errorCount变量用于记录分类出错的样本数量，第47行获取标签数据和训练集数据，第53行到第64行使用测试集数据进行测试。依次读取testDigits目录下的每个文件，根据文件名称获取其真实分类数字，然后使用classify0函数基于kNN算法进行分类，对比两个分类结果。如果不一致，就对errorCount自增1。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handwritingClassTest</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="comment">#错误检测计数</span></span><br><span class="line">	errorCount = <span class="number">0.0</span></span><br><span class="line">	hwLabels,trainingMat=loadTrainData()</span><br><span class="line">    <span class="comment">#返回testDigits目录下的文件名</span></span><br><span class="line">	testFileList = listdir(<span class="string">'kNN_hand_writing/testDigits'</span>)</span><br><span class="line">	<span class="comment">#测试数据的数量</span></span><br><span class="line">	mTest = len(testFileList)</span><br><span class="line">	<span class="comment">#从文件中解析出测试集的类别并进行分类测试</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(mTest):</span><br><span class="line">		<span class="comment">#获得文件的名字</span></span><br><span class="line">		fileNameStr = testFileList[i]</span><br><span class="line">		<span class="comment">#获得分类的数字</span></span><br><span class="line">		classNumber = int(fileNameStr.split(<span class="string">'_'</span>)[<span class="number">0</span>])</span><br><span class="line">		<span class="comment">#获得测试集的1x1024向量,用于训练</span></span><br><span class="line">		vectorUnderTest = img2vector(<span class="string">'kNN_hand_writing/testDigits/%s'</span> % (fileNameStr))</span><br><span class="line">		<span class="comment">#获得预测结果</span></span><br><span class="line">		classifierResult = classify0(vectorUnderTest, trainingMat, hwLabels, <span class="number">3</span>)</span><br><span class="line">		print(fileNameStr+<span class="string">"分类返回结果为%d\t真实结果为%d"</span> % (classifierResult, classNumber))</span><br><span class="line">		<span class="keyword">if</span>(classifierResult != classNumber):</span><br><span class="line">			errorCount += <span class="number">1.0</span></span><br><span class="line">	print(<span class="string">"总共错了%d个数据\n错误率为%f%%"</span> % (errorCount, errorCount/mTest))</span><br></pre></td></tr></table></figure>
+<p>最后，添加main入口，调用kNNHandWrittenTest函数，对手写字识别系统进行验证。上述代码的输出结果如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    handwritingClassTest();</span><br></pre></td></tr></table></figure>
+<p>7_17.txt分类返回结果为7    真实结果为7<br>7_86.txt分类返回结果为7    真实结果为7<br>….<br>1_86.txt分类返回结果为7    真实结果为1<br><em>我找了一个错误数据给大家看一下</em><br><img src="1_86_7_kNN_hand_writing.png" alt="photo1_7"><br><strong><em>比较胖的1。。。。</em></strong><br>….<br>9_16.txt分类返回结果为9    真实结果为9<br>4_37.txt分类返回结果为4    真实结果为4<br>总共错了12个数据<br>错误率为0.012685%</p>
+<p>可以看到测试总数据量为946，出错的数据量为12，错误率为0.012685%。上述代码中使用的k为3，你可以将k的数量进行调整，观察k的值和错误间的联系。</p>
+<h2 id="sklearn的kNN算法介绍"><a href="#sklearn的kNN算法介绍" class="headerlink" title="sklearn的kNN算法介绍"></a>sklearn的kNN算法介绍</h2><p>sklearn.neighbors模块实现了k-近邻算法，点击<a href="http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html" target="_blank" rel="noopener">官网英文文档</a>点击<a href="https://www.cntofu.com/book/170/readme.html" target="_blank" rel="noopener">官网中文文档</a>地址，在sklearn官网上查看sklearn的kNN算法的详细使用手册。内容如下图所示。<br><img src="3_kNN_hand_writing.png" alt="photo3"><br>我们使用sklearn.neighbors.KNeighborsClassifier也可以是实现上小节，我们实现的k-近邻算法。KNeighborsClassifier函数一共有8个参数，如下图所示。<br><img src="4_kNN_hand_writing.png" alt="photo4"><br>KNneighborsClassifier参数说明：  </p>
+<ul>
+<li>n_neighbors：默认为5，就是k-NN的k的值，选取最近的k个点。</li>
+<li>weights：默认是uniform，参数可以是uniform、distance，也可以是用户自己定义的函数。uniform是均等的权重，就说所有的邻近点的权重都是相等的。distance是不均等的权重，距离近的点比距离远的点的影响大。用户自定义的函数，接收距离的数组，返回一组维数相同的权重。  </li>
+<li>algorithm：快速k近邻搜索算法，默认参数为auto，可以理解为算法自己决定合适的搜索算法。除此之外，用户也可以自己指定搜索算法ball_tree、kd_tree、brute方法进行搜索，brute是蛮力搜索，也就是线性扫描，当训练集很大时，计算非常耗时。</li>
+<li>kd_tree，构造kd树存储数据以便对其进行快速检索的树形数据结构，kd树也就是数据结构中的二叉树。以中值切分构造的树，每个结点是一个超矩形，在维数小于20时效率高。ball tree是为了克服kd树高纬失效而发明的，其构造过程是以质心C和半径r分割样本空间，每个节点是一个超球体。  </li>
+<li>leaf_size：默认是30，这个是构造的kd树和ball树的大小。这个值的设置会影响树构建的速度和搜索速度，同样也影响着存储树所需的内存大小。需要根据问题的性质选择最优的大小。  </li>
+<li>metric：用于距离度量，默认度量是minkowski，也就是p=2的欧氏距离(欧几里德度量)。  </li>
+<li>p：距离度量公式。在上小结，我们使用欧氏距离公式进行距离度量。除此之外，还有其他的度量方法，例如曼哈顿距离。这个参数默认为2，也就是默认使用欧式距离公式进行距离度量。也可以设置为1，使用曼哈顿距离公式进行距离度量。  </li>
+<li>metric_params：距离公式的其他关键参数，这个可以不管，使用默认的None即可。  </li>
+<li>n_jobs：并行处理设置。默认为1，临近点搜索并行工作数。如果为-1，那么CPU的所有cores都用于并行工作。  </li>
+</ul>
+<p>KNeighborsClassifier提供了以一些方法供我们使用，如下图所示:<br><img src="5_kNN_hand_writing.png" alt="photo5"><br>接下来，我们说明如何基于sklearn的kNN实现手写字识别。</p>
+<h2 id="基于sklearn的kNN实现手写字识别"><a href="#基于sklearn的kNN实现手写字识别" class="headerlink" title="基于sklearn的kNN实现手写字识别"></a>基于sklearn的kNN实现手写字识别</h2><p>由于基于sklearn提供的kNN算法，修改kNNHandWrittenTest函数，将调用classify0的部分逻辑修改为sklearn提供的kNN接口。两个版本的其他部分的逻辑是完全一样的。具体修改的部分如下图红色框中的代码所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handwritingClassTest</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="comment">#错误检测计数</span></span><br><span class="line">	errorCount = <span class="number">0.0</span></span><br><span class="line">	hwLabels,trainingMat=loadTrainData()</span><br><span class="line">    <span class="comment">#返回testDigits目录下的文件名</span></span><br><span class="line">	testFileList = listdir(<span class="string">'kNN_hand_writing/testDigits'</span>)</span><br><span class="line">	<span class="comment">#测试数据的数量</span></span><br><span class="line">	mTest = len(testFileList)</span><br><span class="line">	neigh=kNN(n_neighbors=<span class="number">3</span>,algorithm=<span class="string">'auto'</span>)</span><br><span class="line">	neigh.fit(trainingMat,hwLabels)</span><br><span class="line">	<span class="comment">#从文件中解析出测试集的类别并进行分类测试</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(mTest):</span><br><span class="line">		<span class="comment">#获得文件的名字</span></span><br><span class="line">		fileNameStr = testFileList[i]</span><br><span class="line">		<span class="comment">#获得分类的数字</span></span><br><span class="line">		classNumber = int(fileNameStr.split(<span class="string">'_'</span>)[<span class="number">0</span>])</span><br><span class="line">		<span class="comment">#获得测试集的1x1024向量,用于训练</span></span><br><span class="line">		vectorUnderTest = img2vector(<span class="string">'kNN_hand_writing/testDigits/%s'</span> % (fileNameStr))</span><br><span class="line">		<span class="comment">#获得预测结果</span></span><br><span class="line">		classifierResult = neigh.predict(vectorUnderTest)</span><br><span class="line">		print(fileNameStr+<span class="string">"分类返回结果为%d\t真实结果为%d"</span> % (classifierResult, classNumber))</span><br><span class="line">		<span class="keyword">if</span>(classifierResult != classNumber):</span><br><span class="line">			errorCount += <span class="number">1.0</span></span><br><span class="line">	print(<span class="string">"总共错了%d个数据\n错误率为%f%%"</span> % (errorCount, errorCount/mTest))</span><br></pre></td></tr></table></figure>
+<p>同时注意需要导入sklearn库的kNN算法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier <span class="keyword">as</span> kNN</span><br></pre></td></tr></table></figure>
+<p>代码修改完毕后，运行代码，输出结果如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    handwritingClassTest();</span><br></pre></td></tr></table></figure>
+<p>总共错了12个数据<br>错误率为0.012685%<br><em>错误率和上边相同</em><br>于是我验证一下两者判断能力是否相同，在对应的handwritingClassTest()我加入了wrongList.append(leNameStr)。得到如下结果：</p>
+<ul>
+<li><p>自定义KNN: [‘5_42.txt’, ‘8_36.txt’, ‘8_11.txt’, ‘9_14.txt’, ‘5_43.txt’, ‘8_68.txt’, ‘8_45.txt’, ‘3_11.txt’, ‘8_23.txt’, ‘9_60.txt’, ‘9_68.txt’, ‘1_86.txt’]</p>
+</li>
+<li><p>基于sklearn的KNN: [‘5_42.txt’, ‘8_36.txt’, ‘8_11.txt’, ‘9_14.txt’, ‘5_43.txt’, ‘8_68.txt’, ‘8_45.txt’, ‘3_11.txt’, ‘8_23.txt’, ‘9_60.txt’, ‘9_68.txt’, ‘1_86.txt’]<br>结果上，完全相同。</p>
+</li>
+<li><p>将K改为1，最终结果：总共错了12个数据，错误率为0.012685% <strong>错误率保持</strong></p>
+</li>
+<li><p>将K改为2，最终结果：总共错了21个数据，错误率为0.022199% <strong>错误率上升</strong></p>
+</li>
+<li><p>将K改为4，最终结果：总共错了16个数据，错误率为0.016913% <strong>错误率上升</strong></p>
+</li>
+<li><p>将K改为5，最终结果：总共错了18个数据，错误率为0.019027% <strong>错误率上升</strong></p>
+</li>
+<li><p>将K改为6，最终结果：总共错了22个数据，错误率为0.023256% <strong>错误率上升</strong></p>
+</li>
+<li><p>K取3是比较合理的 </p>
+</li>
+</ul>
+<p>将weights改为distance时，我预测当K比较大时，会减小错误率<br>验证：</p>
+<ul>
+<li><p>k=3,weights=’uniform’ 总共错了12个数据 错误率为0.012685%</p>
+</li>
+<li><p>k=3,weights=’distance’ 总共错了12个数据 错误率为0.012685% <strong>错误率保持</strong></p>
+</li>
+<li><p>k=4,weights=’uniform’ 总共错了16个数据 错误率为0.016913% </p>
+</li>
+<li><p>k=4,weights=’distance’ 总共错了10个数据 错误率为0.010571% <strong>错误率下降</strong></p>
+</li>
+<li><p>k=6,weights=’uniform’ 总共错了22个数据 错误率为0.023256%</p>
+</li>
+<li><p>k=6,weights=’distance’ 总共错了17个数据错误率为0.017970% <strong>错误率下降</strong></p>
+</li>
+</ul>
+<p>这里默认p=2，是使用的欧几里得距离，这里我们将p=1，使用曼哈顿距离</p>
+<ul>
+<li>总共错了12个数据 错误率为0.012685%，错误率保持</li>
+</ul>
+<h2 id="实验总结"><a href="#实验总结" class="headerlink" title="实验总结"></a>实验总结</h2><h3 id="1-掌握内容"><a href="#1-掌握内容" class="headerlink" title="1.掌握内容"></a>1.掌握内容</h3><p>通过本实验，你应该至少掌握了机器学习的以下几点：</p>
+<ul>
+<li>kNN算法的数学原理</li>
+<li>kNN算法的步骤流程。</li>
+<li>基于Python实现kNN算法。</li>
+<li>使用kNN算法解决手写字识别问题。</li>
+<li>学会使用sklearn提供的kNN算法。</li>
+<li>知道怎样查阅sklearn的使用手册。</li>
+<li>学会使用sklearn的kNN算法解决手写字识别问题。</li>
+</ul>
+<h3 id="2-kNN算法的优缺点"><a href="#2-kNN算法的优缺点" class="headerlink" title="2.kNN算法的优缺点"></a>2.kNN算法的优缺点</h3><h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h3><ul>
+<li>简单好用，容易理解，精度高，理论成熟，既可以用来做分类也可以用来做回归；</li>
+<li>可用于数值型数据和离散型数据；</li>
+<li>训练时间复杂度为O(n)；无数据输入假定；</li>
+<li>对异常值不敏感。</li>
+</ul>
+<h3 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h3><ul>
+<li>计算复杂性高；空间复杂性高；</li>
+<li>样本不平衡问题（即有些类别的样本数量很多，而其它样本的数量很少）；</li>
+<li>一般数值很大的时候不用这个，计算量太大。但是单个样本又不能太少，否则容易发生误分。</li>
+<li>最大的缺点是无法给出数据的内在含义。</li>
+</ul>
+<h2 id="参考文献及延伸阅读"><a href="#参考文献及延伸阅读" class="headerlink" title="参考文献及延伸阅读"></a>参考文献及延伸阅读</h2><h3 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h3><p>1.哈林顿，李锐. 机器学习实战 : Machine learning in action[M]. 人民邮电出版社, 2013.<br>2.周志华. 机器学习:Machine learning[M]. 清华大学出版社, 2016.</p>
+<h3 id="延伸阅读："><a href="#延伸阅读：" class="headerlink" title="延伸阅读："></a>延伸阅读：</h3><p>1.李航. 统计学习方法[M]. 清华大学出版社, 2012.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
+          
+            <a href="/tags/KNN/" rel="tag"><i class="fa fa-tag"></i> KNN</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/09/%E8%93%9D%E6%A1%A5%E6%9D%AF%E7%BB%83%E4%B9%A0/" rel="next" title="编程练习">
+                <i class="fa fa-chevron-left"></i> 编程练习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/11/%E5%9F%BA%E4%BA%8E%E7%94%A8%E6%88%B7%E7%9A%84%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E7%AE%97%E6%B3%95%E7%9A%84%E7%94%B5%E5%BD%B1%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" rel="prev" title="基于用户的协同过滤算法的电影推荐系统">
+                基于用户的协同过滤算法的电影推荐系统 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/lgcj.gif"
+                alt="听闻有雨" />
+            
+              <p class="site-author-name" itemprop="name">听闻有雨</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/The-Day" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wzx5263@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/aimber6" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验介绍"><span class="nav-number">2.</span> <span class="nav-text">实验介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-实验内容"><span class="nav-number">2.1.</span> <span class="nav-text">1.实验内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-实验目标"><span class="nav-number">2.2.</span> <span class="nav-text">2.实验目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-实验知识点"><span class="nav-number">2.3.</span> <span class="nav-text">3.实验知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-实验环境"><span class="nav-number">2.4.</span> <span class="nav-text">4.实验环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-预备知识"><span class="nav-number">2.5.</span> <span class="nav-text">5.预备知识</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验原理"><span class="nav-number">3.</span> <span class="nav-text">实验原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-kNN算法简介"><span class="nav-number">3.1.</span> <span class="nav-text">1.kNN算法简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-kNN算法流程"><span class="nav-number">3.2.</span> <span class="nav-text">2.kNN算法流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sklearn简介"><span class="nav-number">3.3.</span> <span class="nav-text">Sklearn简介</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验准备"><span class="nav-number">4.</span> <span class="nav-text">实验准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#框架"><span class="nav-number">5.</span> <span class="nav-text">框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现kNN核心算法"><span class="nav-number">6.</span> <span class="nav-text">实现kNN核心算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-1：实现kNN分类函数（2分）"><span class="nav-number">6.1.</span> <span class="nav-text">Exercise 1：实现kNN分类函数（2分）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加载手写字训练集数据"><span class="nav-number">7.</span> <span class="nav-text">加载手写字训练集数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-2：实现手写数字训练集数据中的单个文件加载函数（4分）"><span class="nav-number">7.1.</span> <span class="nav-text">Exercise 2：实现手写数字训练集数据中的单个文件加载函数（4分）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-3：实现所有数据集的加载（4分）"><span class="nav-number">7.2.</span> <span class="nav-text">Exercise 3：实现所有数据集的加载（4分）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用测试数据集验证分类算法"><span class="nav-number">8.</span> <span class="nav-text">使用测试数据集验证分类算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sklearn的kNN算法介绍"><span class="nav-number">9.</span> <span class="nav-text">sklearn的kNN算法介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于sklearn的kNN实现手写字识别"><span class="nav-number">10.</span> <span class="nav-text">基于sklearn的kNN实现手写字识别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验总结"><span class="nav-number">11.</span> <span class="nav-text">实验总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-掌握内容"><span class="nav-number">11.1.</span> <span class="nav-text">1.掌握内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-kNN算法的优缺点"><span class="nav-number">11.2.</span> <span class="nav-text">2.kNN算法的优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优点："><span class="nav-number">11.3.</span> <span class="nav-text">优点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点："><span class="nav-number">11.4.</span> <span class="nav-text">缺点：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献及延伸阅读"><span class="nav-number">12.</span> <span class="nav-text">参考文献及延伸阅读</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料："><span class="nav-number">12.1.</span> <span class="nav-text">参考资料：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#延伸阅读："><span class="nav-number">12.2.</span> <span class="nav-text">延伸阅读：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">听闻有雨</span>
+
+  
+<!--
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+-->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'C9e0gtFXui1Qmuw8A85Mkl0J-gzGzoHsz',
+        appKey: 'qTPAaIiJUVl28t67Rd2VRN7a',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
