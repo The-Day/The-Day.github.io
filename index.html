@@ -239,6 +239,275 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%BB%83%E4%B9%A0%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="听闻有雨">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lgcj.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TheDay">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%BB%83%E4%B9%A0%E9%A2%98/" itemprop="url">数据结构练习题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-19T20:49:54+08:00">
+                2020-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/02/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%BB%83%E4%B9%A0%E9%A2%98/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/02/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%BB%83%E4%B9%A0%E9%A2%98/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1001-A-B-Format-20分"><a href="#1001-A-B-Format-20分" class="headerlink" title="1001 A+B Format (20分)"></a>1001 A+B Format (20分)</h1><p>Calculate a+b and output the sum in standard format – that is, the digits must be separated into groups of three by commas (unless there are less than four digits).</p>
+<p><strong><em>Input Specification:</em></strong><br>Each input file contains one test case. Each case contains a pair of integers a and b where −10<br>​6<br>​​ ≤a,b≤10<br>​6<br>​​ . The numbers are separated by a space.</p>
+<p><strong><em>Output Specification:</em></strong><br>For each test case, you should output the sum of a and b in one line. The sum must be written in the standard format.</p>
+<p><strong><em>Sample Input:</em></strong><br>    -1000000 9</p>
+<p><strong><em>Sample Output:</em></strong><br>    -999,991</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STACK_INIT_SIZE 100</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STACKINCREMENT 10</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;malloc.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TRUE        1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FALSE       0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OK          1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ERROR       0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INFEASIBLE -1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> SElemType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Statue;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    SElemType *base;</span><br><span class="line">    SElemType *top;</span><br><span class="line">    <span class="keyword">int</span> stacksize;</span><br><span class="line">&#125;SqStack;</span><br><span class="line"></span><br><span class="line"><span class="function">Statue <span class="title">InitStack</span><span class="params">(SqStack &amp;s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    s.base = (SElemType *)<span class="built_in">malloc</span>(STACK_INIT_SIZE*<span class="keyword">sizeof</span>(SElemType));</span><br><span class="line">    <span class="keyword">if</span>(!s.base) <span class="built_in">exit</span>(OVERFLOW);</span><br><span class="line">    s.top=s.base;</span><br><span class="line">    s.stacksize=STACK_INIT_SIZE;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetTop</span><span class="params">(SqStack s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt; *(s.top<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">Statue <span class="title">Push</span><span class="params">(SqStack &amp;s,SElemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.top - s.base&gt;=s.stacksize)</span><br><span class="line">    &#123;</span><br><span class="line">        s.base = (SElemType *)<span class="built_in">realloc</span>(s.base,(s.stacksize+STACKINCREMENT)*<span class="keyword">sizeof</span>(SElemType));</span><br><span class="line">        <span class="keyword">if</span>(!s.base) <span class="built_in">exit</span>(OVERFLOW);</span><br><span class="line">        s.top=s.base+s.stacksize;</span><br><span class="line">        s.stacksize+=STACKINCREMENT;</span><br><span class="line">    &#125;</span><br><span class="line">    *s.top++ = e;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Statue <span class="title">Pop</span><span class="params">(SqStack &amp;s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.top==s.base) <span class="keyword">return</span> ERROR;</span><br><span class="line">    *--s.top;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Statue <span class="title">Empty</span><span class="params">(SqStack &amp;s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.top==s.base)</span><br><span class="line">        <span class="keyword">return</span> TRUE;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> FALSE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    SqStack s;</span><br><span class="line">    InitStack(s);</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    <span class="keyword">int</span> sum=<span class="built_in">abs</span>(a+b);</span><br><span class="line">    <span class="keyword">if</span>(a+b&lt;<span class="number">0</span>)</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"-"</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(sum==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;sum;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;sum&gt;<span class="number">0</span>;sum=sum/<span class="number">10</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        Push(s,sum%<span class="number">10</span>+<span class="string">'0'</span>);</span><br><span class="line">        i++;</span><br><span class="line">        <span class="keyword">if</span>(i==<span class="number">3</span>&amp;&amp;sum/<span class="number">10</span>&gt;<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Push(s,<span class="string">','</span>);</span><br><span class="line">            i=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(!Empty(s))</span><br><span class="line">    &#123;</span><br><span class="line">        GetTop(s);</span><br><span class="line">        Pop(s);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#1002 A+B for Polynomials (25分)<br>This time, you are supposed to find A+B where A and B are two polynomials.</p>
+<p><strong><em>Input Specification:</em></strong><br>Each input file contains one test case. Each case occupies 2 lines, and each line contains the information of a polynomial:<br>K N1 aN1 N2 aN2 … NK aNK<br>where K is the number of nonzero terms in the polynomial, Ni and aNi b(i=1,2,⋯,K) are the exponents and coefficients, respectively. It is given that 1 ≤ K ≤ 10，0 ≤ NK &lt;⋯&lt; N2 &lt; N1 ≤ 1000.</p>
+<p><strong><em>Output Specification:</em></strong><br>For each test case you should output the sum of A and B in one line, with the same format as the input. Notice that there must be NO extra space at the end of each line. Please be accurate to 1 decimal place.</p>
+<p><strong><em>Sample Input:</em></strong><br>    2 1 2.4 0 3.2<br>    2 2 1.5 1 0.5</p>
+<p><strong><em>Sample Output:</em></strong><br>    3 2 1.5 1 2.9 0 3.2</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">PNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">double</span> coef;     <span class="comment">//系数</span></span><br><span class="line">    <span class="keyword">int</span> expn;   <span class="comment">//指数</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">PNode</span> *<span class="title">next</span>;</span> <span class="comment">//指针域</span></span><br><span class="line">&#125;PNode,*Polynomial;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CreatePolyn</span><span class="params">(Polynomial &amp;P)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    Polynomial s,pre,q;</span><br><span class="line">    P=<span class="keyword">new</span> PNode;</span><br><span class="line">    P-&gt;next=<span class="literal">NULL</span>;       <span class="comment">//建立一个带头结点的单链表</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)   <span class="comment">//依次输入n个非零项</span></span><br><span class="line">    &#123;</span><br><span class="line">        s=<span class="keyword">new</span> PNode;    <span class="comment">//生成新结点</span></span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;s-&gt;expn&gt;&gt;s-&gt;coef;  <span class="comment">//输入系数和指数</span></span><br><span class="line">        pre=P;  <span class="comment">//用以保存q的前驱，初值为头结点</span></span><br><span class="line">        q=P-&gt;next;  <span class="comment">//q初始化，指向首元结点</span></span><br><span class="line">        <span class="keyword">while</span>(q&amp;&amp;q-&gt;expn&gt;s-&gt;expn)   <span class="comment">//比较指数找到第一个大于输入项指数的项*q</span></span><br><span class="line">        &#123;</span><br><span class="line">            pre=q;</span><br><span class="line">            q=q-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        s-&gt;next=q;  <span class="comment">//将输入项s插入到q和其前驱结点pre之间</span></span><br><span class="line">        pre-&gt;next=s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AddPolyn</span><span class="params">(Polynomial &amp;Pa,Polynomial &amp;Pb)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Polynomial p1,p2,p3,r;</span><br><span class="line">    <span class="keyword">double</span> sum;</span><br><span class="line">    p1=Pa-&gt;next;</span><br><span class="line">    p2=Pb-&gt;next;    <span class="comment">//p1和p2初值分别指向Pa和Pb的首元结点</span></span><br><span class="line">    p3=Pa;  <span class="comment">//p3指向和多项式的当前结点，初值为Pa</span></span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(p1&amp;&amp;p2)<span class="comment">//p1和p2均非空</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(p1-&gt;expn==p2-&gt;expn)  <span class="comment">//指数相等</span></span><br><span class="line">        &#123;</span><br><span class="line">            sum=p1-&gt;coef+p2-&gt;coef;  <span class="comment">//sum保存两项的系数和</span></span><br><span class="line">            <span class="keyword">if</span>(sum!=<span class="number">0</span>)  <span class="comment">//系数和不为0</span></span><br><span class="line">            &#123;</span><br><span class="line">                p1-&gt;coef=sum;</span><br><span class="line">                p3-&gt;next=p1;</span><br><span class="line">                p3=p1;</span><br><span class="line">            &#125;</span><br><span class="line">            p1=p1-&gt;next;</span><br><span class="line">            p2=p2-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(p1-&gt;expn&gt;p2-&gt;expn)<span class="comment">//Pa当前结点的指数小</span></span><br><span class="line">        &#123;</span><br><span class="line">            p3-&gt;next=p1;</span><br><span class="line">            p3=p1;</span><br><span class="line">            p1=p1-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span><span class="comment">//Pb当前的指数小</span></span><br><span class="line">        &#123;</span><br><span class="line">            p3-&gt;next=p2;</span><br><span class="line">            p3=p2;</span><br><span class="line">            p2=p2-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    p3-&gt;next=p1?p1:p2;  <span class="comment">//插入非空多项式的剩余段</span></span><br><span class="line">    <span class="keyword">delete</span> Pb;  <span class="comment">//释放Pb的头结点</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Length</span><span class="params">(Polynomial &amp;h)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len=<span class="number">0</span>;</span><br><span class="line">    Polynomial p=h-&gt;next;</span><br><span class="line">    <span class="keyword">while</span>(p)</span><br><span class="line">    &#123;</span><br><span class="line">        p=p-&gt;next;</span><br><span class="line">        len++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">prin</span><span class="params">(Polynomial &amp;h)</span> <span class="comment">//输出多项式</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Polynomial p=h-&gt;next;</span><br><span class="line">    <span class="keyword">while</span>(p)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d %.1lf"</span>,p-&gt;expn,p-&gt;coef);</span><br><span class="line">        <span class="comment">//cout&lt;&lt;p-&gt;expn&lt;&lt;" "&lt;&lt;p-&gt;coef;</span></span><br><span class="line">        <span class="keyword">if</span>(p-&gt;next)</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">        p=p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    PNode *Pa,*Pb;</span><br><span class="line">    CreatePolyn(Pa);  <span class="comment">//创建多项式</span></span><br><span class="line">    <span class="comment">//prin(Pa);</span></span><br><span class="line">    CreatePolyn(Pb);</span><br><span class="line">    <span class="comment">//prin(Pb);</span></span><br><span class="line"></span><br><span class="line">    AddPolyn(Pa,Pb);    <span class="comment">//多项式相加</span></span><br><span class="line">    <span class="keyword">if</span>(Length(Pa)==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="number">0</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;Length(Pa)&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    prin(Pa);   <span class="comment">//输出</span></span><br><span class="line">    <span class="comment">//cout&lt;&lt;endl;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%BF%94%E7%92%9E%E5%BD%92%E7%9C%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="听闻有雨">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lgcj.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TheDay">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%BF%94%E7%92%9E%E5%BD%92%E7%9C%9F/" itemprop="url">数据结构返璞归真</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-18T18:58:40+08:00">
+                2020-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/02/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%BF%94%E7%92%9E%E5%BD%92%E7%9C%9F/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/02/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%BF%94%E7%92%9E%E5%BD%92%E7%9C%9F/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/11/sk_feature/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1360,7 +1629,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
