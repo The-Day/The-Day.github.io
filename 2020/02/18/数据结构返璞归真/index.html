@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="C++,数据结构," />
 
 
 
@@ -79,13 +79,17 @@
 
 
 
+<meta name="description" content="前言深入学习一下数据结构，以邓老师的数据结构为主。 计算一上来将来一个古埃及的绳索计算机，感觉还可以等之后，介绍了尺规计算机，举了一个求平面内直线段的三等分的问题，说实话，我是想不到的。紧接着对计算进行了总结定义。·计算&#x3D;信息处理借助某种工具，按照一定规则，以明确而机械的形式进行·计算模型&#x3D;计算机&#x3D;信息处理工具·所谓算法，即特定计算模型下，旨在解决特定问题的指令序列输入 输出 正确性 确定性 可行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构返璞归真">
 <meta property="og:url" content="http://yoursite.com/2020/02/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%BF%94%E7%92%9E%E5%BD%92%E7%9C%9F/index.html">
 <meta property="og:site_name" content="TheDay">
+<meta property="og:description" content="前言深入学习一下数据结构，以邓老师的数据结构为主。 计算一上来将来一个古埃及的绳索计算机，感觉还可以等之后，介绍了尺规计算机，举了一个求平面内直线段的三等分的问题，说实话，我是想不到的。紧接着对计算进行了总结定义。·计算&#x3D;信息处理借助某种工具，按照一定规则，以明确而机械的形式进行·计算模型&#x3D;计算机&#x3D;信息处理工具·所谓算法，即特定计算模型下，旨在解决特定问题的指令序列输入 输出 正确性 确定性 可行">
 <meta property="article:published_time" content="2020-02-18T10:58:40.000Z">
-<meta property="article:modified_time" content="2020-02-18T10:58:40.906Z">
+<meta property="article:modified_time" content="2020-02-20T12:14:39.373Z">
 <meta property="article:author" content="听闻有雨">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
 
 
@@ -280,6 +284,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BB%83%E4%B9%A0%E9%A2%98/" itemprop="url" rel="index">
+                    <span itemprop="name">练习题</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BB%83%E4%B9%A0%E9%A2%98/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -317,7 +354,46 @@
       
 
       
-        
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>深入学习一下数据结构，以邓老师的数据结构为主。</p>
+<h2 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h2><p>一上来将来一个古埃及的绳索计算机，感觉还可以<br>等之后，介绍了尺规计算机，举了一个求平面内直线段的三等分的问题，说实话，我是想不到的。<br>紧接着对计算进行了总结定义。<br>·计算=信息处理<br>借助某种工具，按照一定规则，以明确而机械的形式进行<br>·计算模型=计算机=信息处理工具<br>·所谓算法，即特定计算模型下，旨在解决特定问题的指令序列<br>输入 输出 正确性 确定性 可行性 有穷性 ·····</p>
+<h3 id="算法-有穷性"><a href="#算法-有穷性" class="headerlink" title="算法:有穷性"></a>算法:有穷性</h3><p>序列Hailstone hail=冰雹<br>希尔顿数列 厉害👍<br>目前无法证明其有穷性，故不是算法<br>结论:程序不一定是算法</p>
+<h3 id="好算法"><a href="#好算法" class="headerlink" title="好算法"></a>好算法</h3><p>·正确<br>简单的 大规模的 一般性的 退化的 任意合法的<br>·健壮<br>·可读<br><strong>·效率</strong></p>
+<h3 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h3><p>两个主要方面<br>·正确性<br>·<strong>成本</strong><br>考察<br>特定算法+不同实例<br>在n个点中，求组成最小的三角形面积</p>
+<h3 id="RAM"><a href="#RAM" class="headerlink" title="RAM"></a>RAM</h3><p>算法的运行时间 转换为 算法需要执行的基本操作次数<br>Floor:<br>向下取整c/d = max{x|d x &lt;= c}<br>            = max{x|d x &lt; 1+c}<br>好读书不求甚解<br>每有会意，便欣然忘食<br>———陶渊明</p>
+<h3 id="渐进分析：大O记号"><a href="#渐进分析：大O记号" class="headerlink" title="渐进分析：大O记号"></a>渐进分析：大O记号</h3><p>2-subset<br>已知n个数据，其总和恰好是偶数T，是否存在部分数据和为T/2<br>直觉算法：枚举 复杂度为2^n<br>n个元素 都有存在或不存在两种状态 组合就有2^n种</p>
+<h3 id="减而治之"><a href="#减而治之" class="headerlink" title="减而治之"></a>减而治之</h3><p>递归跟踪 recursion trace</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//求和函数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> </span><br><span class="line">	  (n &lt; <span class="number">1</span>)?</span><br><span class="line">	    <span class="number">0</span> : sum(A, n<span class="number">-1</span>) + A[n<span class="number">-1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组倒置"><a href="#数组倒置" class="headerlink" title="数组倒置"></a>数组倒置</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reveres</span><span class="params">(<span class="keyword">int</span>* A, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span></span><br></pre></td></tr></table></figure>
+<p>递归版</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (lo &lt; hi)</span><br><span class="line">&#123;</span><br><span class="line">	swap(A[lo], A[hi]);</span><br><span class="line">	reveres(A, lo + <span class="number">1</span>, hi - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>递归原始版</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">next:</span><br><span class="line">	<span class="keyword">if</span> (lo &lt; hi)</span><br><span class="line">	&#123;</span><br><span class="line">		swap(A[lo], A[hi]);</span><br><span class="line">			lo++;</span><br><span class="line">			hi--;</span><br><span class="line">			<span class="keyword">goto</span> next;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>迭代精简版</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (lo &lt; hi)</span><br><span class="line">	swap(A[lo++], A[hi--]);</span><br></pre></td></tr></table></figure>
+<h3 id="分而治之"><a href="#分而治之" class="headerlink" title="分而治之"></a>分而治之</h3><p>数组求和：二分递归</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (lo == hi) <span class="keyword">return</span> A[lo];</span><br><span class="line">	<span class="keyword">int</span> mi = (lo + hi) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> sum(A, lo, mi) + sum(A, mi + <span class="number">1</span>, hi);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Max2 :<br>从数组区间A[lo, hi)中找出最大的两个整数A[x1]和A[x2]<br>元素比较的次数，要求尽可能的少</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">max2</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> lo, <span class="keyword">int</span> hi, <span class="keyword">int</span> &amp; x1, <span class="keyword">int</span> &amp; x2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (x1 = lo, <span class="keyword">int</span> i = lo + <span class="number">1</span>; i &lt; hi; i++)</span><br><span class="line">		<span class="keyword">if</span> (A[x1] &lt; A[i]) x1 = i;</span><br><span class="line">	<span class="keyword">for</span> (x2 = lo, <span class="keyword">int</span> i = lo + <span class="number">1</span>; i &lt; x1; i++)</span><br><span class="line">		<span class="keyword">if</span> (A[x2] &lt; A[i]) x2 = i;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = x1 + <span class="number">1</span>; i &lt; hi; i++)</span><br><span class="line">		<span class="keyword">if</span> (A[x2] &lt; A[i]) x2 = i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>比较次数2n - 3</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">max2</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> lo, <span class="keyword">int</span> hi, <span class="keyword">int</span> &amp; x, <span class="keyword">int</span> &amp; x2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (A[x1 = lo] &lt; A[x2 = lo +<span class="number">1</span>]) swap(x1, x2)</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = lo + <span class="number">1</span>, i &lt; hi; i++)</span><br><span class="line">		<span class="keyword">if</span> (A[x2] &lt; A[x1])</span><br><span class="line">			<span class="keyword">if</span> (A[x1] &lt; A[x2 = i])</span><br><span class="line">				swap(x1, x2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最好比较次数 n - 1<br>最坏比较次数2n - 3</p>
+<p>递归 + 分而治之</p>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>Make it work,<br>make it right,<br><strong><em>make it fast.</em></strong></p>
+<ul>
+<li>Kent Beck<br>斐波那契数列<br>迭代<br>解决方法A(记忆:memoization)<br>将已计算过实例的结果制表备查</li>
+</ul>
+<p>解决方法B(动态规划: dynamic programing)<br>颠倒计算方向:由自顶而下递归,为自底而上迭代<br>竹鼠问题</p>
+<p>LCS:递归<br> 子序列(Subsequence):由序列中若干字符,按原相对次序构成</p>
+<p>最长公共子序列(Longest Common Subsequence):两个序列公共子序列中的最长者</p>
+<p>对于序列A[0, n]和B[0, m], LCS(A, b)无非三种情况<br>·若n = -1或m = -1, 则取作空序列(“”)</p>
+<p>·若A[n] = ‘A’ = B[m],则取作LCS(a[0, n), B[0, m)) + ‘X’</p>
+<p>·A[n] ≠ B[m], 则在 LCS(A[0, n], B[0, m))<br>LCS(A[0, n), B[0, m])</p>
+<p>·单调性：无论如何，每经过一次对比，原问题的规模必可减小<br>具体地，作为输入的两个序列，至少其一的长度缩短一个单位<br>·最好情况（不出现第2种情况）下，只需O（n+m）时间<br>·但问题在于，（在第2种情况）原问题将分解为两个子问题<br>更糟糕的是，它们在随后进一步导出的子问题，可能雷同</p>
+<h2 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h2><p>Vector<br>List<br>线性序列sequence<br>ADT 接口规则<br>implementation 实现<br>Algorithms 算法 排序 查找<br>抽象数据类型 = 数据模型 + 定义在该模型上的一组操作<br>数据类型 : int  float  char<br>数据结构 = 基于某种特定语言，实现ADT的一整套算委鬼正</p>
+<p>Vector模板类</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Rank; <span class="comment">//秩</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEFAULT_CAPACITY 3 <span class="comment">//默认初始容量</span></span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">Vector</span>&#123;</span> <span class="comment">//向量模板类 其中的元素类型 是任意类型的T</span></span><br><span class="line">	<span class="keyword">private</span>: </span><br><span class="line">		Rank _size;<span class="comment">//规模</span></span><br><span class="line">		<span class="keyword">int</span> _capacity;<span class="comment">//容量</span></span><br><span class="line">		T* _elem;<span class="comment">//数据</span></span><br><span class="line">	<span class="keyword">protected</span>:</span><br><span class="line">		<span class="comment">/*内部函数*/</span></span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">copyFrom</span><span class="params">(T* <span class="keyword">const</span> A, Rank lo, Rank hi)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			_elem = <span class="keyword">new</span> T[_capacity = <span class="number">2</span>*(hi - lo)];</span><br><span class="line">			_size = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">while</span> (lo &lt; hi)</span><br><span class="line">				_elem[_size++] = A[lo++];</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">public</span>: </span><br><span class="line">		<span class="comment">/*构造函数*/</span></span><br><span class="line">		Vector(<span class="keyword">int</span> c = DEFAULT_CAPACITY)</span><br><span class="line">		&#123;</span><br><span class="line">			_elem = <span class="keyword">new</span> T[_capacity = c];</span><br><span class="line">			_size = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		Vector(T <span class="keyword">const</span> * A, Rank lo, Rank hi)</span><br><span class="line">		&#123;</span><br><span class="line">			copyFrom(A, lo, hi);</span><br><span class="line">		&#125;</span><br><span class="line">		Vector(Vector&lt;T&gt; <span class="keyword">const</span>&amp; V, Rank lo, Rank hi)</span><br><span class="line">		&#123;</span><br><span class="line">			copyFrom(V._elem, lo, hi);</span><br><span class="line">		&#125;</span><br><span class="line">		Vector(Vector&lt;T&gt; <span class="keyword">const</span>&amp; V)</span><br><span class="line">		&#123;</span><br><span class="line">			copyFrom(V._elem, <span class="number">0</span>, V._size);</span><br><span class="line">		&#125;</span><br><span class="line">		~Vector() </span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">delete</span> []_elem;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -331,6 +407,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"><i class="fa fa-tag"></i> 数据结构</a>
+          
+        </div>
       
 
       
@@ -408,8 +492,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -450,7 +543,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -495,6 +588,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算"><span class="nav-number">2.</span> <span class="nav-text">计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法-有穷性"><span class="nav-number">2.1.</span> <span class="nav-text">算法:有穷性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#好算法"><span class="nav-number">2.2.</span> <span class="nav-text">好算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法分析"><span class="nav-number">2.3.</span> <span class="nav-text">算法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAM"><span class="nav-number">2.4.</span> <span class="nav-text">RAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渐进分析：大O记号"><span class="nav-number">2.5.</span> <span class="nav-text">渐进分析：大O记号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#减而治之"><span class="nav-number">2.6.</span> <span class="nav-text">减而治之</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组倒置"><span class="nav-number">2.7.</span> <span class="nav-text">数组倒置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分而治之"><span class="nav-number">2.8.</span> <span class="nav-text">分而治之</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态规划"><span class="nav-number">2.9.</span> <span class="nav-text">动态规划</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向量"><span class="nav-number">3.</span> <span class="nav-text">向量</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
