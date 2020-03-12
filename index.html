@@ -239,6 +239,194 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/12/2.%E5%9F%BA%E4%BA%8EKNN%E7%9A%84IRIS%E5%88%86%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="听闻有雨">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lgcj.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TheDay">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/12/2.%E5%9F%BA%E4%BA%8EKNN%E7%9A%84IRIS%E5%88%86%E7%B1%BB/" itemprop="url">kNN算法对IRIS数据集进行分类</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-12T21:43:28+08:00">
+                2020-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/03/12/2.%E5%9F%BA%E4%BA%8EKNN%E7%9A%84IRIS%E5%88%86%E7%B1%BB/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/03/12/2.%E5%9F%BA%E4%BA%8EKNN%E7%9A%84IRIS%E5%88%86%E7%B1%BB/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>KNN对实际问题的的解决实例，也是一个比较简单的分类问题</p>
+<h2 id="实验介绍"><a href="#实验介绍" class="headerlink" title="实验介绍"></a>实验介绍</h2><h3 id="1-实验内容"><a href="#1-实验内容" class="headerlink" title="1.实验内容"></a>1.实验内容</h3><p>本实验内容为如何基于kNN算法对IRIS数据集进行分类。</p>
+<h3 id="2-实验目标"><a href="#2-实验目标" class="headerlink" title="2.实验目标"></a>2.实验目标</h3><p>通过本实验进一步掌握kNN算法原理，了解如何使用kNN模型解决实际世界问题。</p>
+<h3 id="3-实验知识点"><a href="#3-实验知识点" class="headerlink" title="3.实验知识点"></a>3.实验知识点</h3><ul>
+<li>kNN算法原理  </li>
+<li>kNN算法流程</li>
+</ul>
+<h3 id="4-实验环境"><a href="#4-实验环境" class="headerlink" title="4.实验环境"></a>4.实验环境</h3><ul>
+<li>python 3.6.5  </li>
+</ul>
+<h3 id="5-预备知识"><a href="#5-预备知识" class="headerlink" title="5.预备知识"></a>5.预备知识</h3><ul>
+<li>初等数学知识  </li>
+<li>Linux命令基本操作  </li>
+<li>Python编程基础</li>
+<li>kNN算法原理</li>
+</ul>
+<h2 id="实验原理"><a href="#实验原理" class="headerlink" title="实验原理"></a>实验原理</h2><h3 id="1-kNN算法简介"><a href="#1-kNN算法简介" class="headerlink" title="1.kNN算法简介"></a>1.kNN算法简介</h3><p>　　k近邻法(k-nearest neighbor, kNN)是1967年由Cover T和Hart P提出的一种基本分类与回归方法。它的工作原理是：存在一个样本数据集合，也称作为训练样本集，并且样本集中每个数据都存在标签，即我们知道样本集中每一个数据与所属分类的对应关系。输入没有标签的新数据后，将新的数据的每个特征与样本集中数据对应的特征进行比较，然后算法提取样本最相似数据(最近邻)的分类标签。一般来说，我们只选择样本数据集中前k个最相似的数据，这就是k-近邻算法中k的出处，通常k是不大于20的整数。最后，选择k个最相似数据中出现次数最多的分类，作为新数据的分类。<br>　　所谓K最近邻，就是k个最近的邻居的意思，说的是每个样本都可以用它最接近的k个邻居来代表。kNN算法的核心思想是如果一个样本在特征空间中的k个最相邻的样本中的大多数属于某一个类别，则该样本也属于这个类别，并具有这个类别上样本的特性。该方法在确定分类决策上只依据最邻近的一个或者几个样本的类别来决定待分样本所属的类别。 kNN方法在类别决策时，只与极少量的相邻样本有关。由于kNN方法主要靠周围有限的邻近的样本，而不是靠判别类域的方法来确定所属类别的，因此对于类域的交叉或重叠较多的待分样本集来说，kNN方法较其他方法更为适合。　　<br><img src="1_kNN_IRIS.png" alt=""><br>　　上图中，绿色圆要被决定赋予哪个类，是红色三角形还是蓝色四方形？如果K=3，由于红色三角形所占比例为2/3，绿色圆将被赋予红色三角形那个类，如果K=5，由于蓝色四方形比例为3/5，因此绿色圆被赋予蓝色四方形类。<br>　　K最近邻(k-Nearest Neighbor，KNN)分类算法，是一个理论上比较成熟的方法，也是最简单的机器学习算法之一。该方法的思路是：如果一个样本在特征空间中的k个最相似(即特征空间中最邻近)的样本中的大多数属于某一个类别，则该样本也属于这个类别。KNN算法中，所选择的邻居都是已经正确分类的对象。该方法在定类决策上只依据最邻近的一个或者几个样本的类别来决定待分样本所属的类别。 KNN方法虽然从原理上也依赖于极限定理，但在类别决策时，只与极少量的相邻样本有关。由于KNN方法主要靠周围有限的邻近的样本，而不是靠判别类域的方法来确定所属类别的，因此对于类域的交叉或重叠较多的待分样本集来说，KNN方法较其他方法更为适合。<br>　　KNN算法不仅可以用于分类，还可以用于回归。通过找出一个样本的k个最近邻居，将这些邻居的属性的平均值赋给该样本，就可以得到该样本的属性。更有用的方法是将不同距离的邻居对该样本产生的影响给予不同的权值(weight)，如权值与距离成反比。　　</p>
+<h3 id="2-kNN计算流程"><a href="#2-kNN计算流程" class="headerlink" title="2.kNN计算流程"></a>2.kNN计算流程</h3><p>a.计算已知类别数据集中的点与当前点之间的距离；<br>b.按照距离递增次序排序；<br>c.选取与当前点距离最小的k个点；<br>d.确定前k个点所在类别的出现频率；<br>e.返回前k个点所出现频率最高的类别作为当前点的预测分类。  </p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>下载<a href="https://pan.baidu.com/s/1GIhRihem6ule2AIqZLk3_w" target="_blank" rel="noopener">kNN_IRIS.tgz 提取码：pluy</a><br>到指定目录下，然后再依次选择点击上方的File-&gt;Open-&gt;Upload,上传刚才下载的数据集压缩包，再使用如下命令解压：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!tar -zxvf kNN_IRIS.tgz</span><br></pre></td></tr></table></figure>
+
+<pre><code>kNN_IRIS/
+kNN_IRIS/iris.csv
+kNN_IRIS/iris.txt
+kNN_IRIS/iris1.csv</code></pre><h2 id="实现kNN核心算法"><a href="#实现kNN核心算法" class="headerlink" title="实现kNN核心算法"></a>实现kNN核心算法</h2><p>这里使用的kNN算法前边已经提到过，就简单的看代码复习一下。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> listdir</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">classify0</span><span class="params">(inX, dataSet, labels, k)</span>:</span></span><br><span class="line">    m=dataSet.shape[<span class="number">0</span>]  <span class="comment">#返回dataSet的行数，即已知数据集中的所有点的数量</span></span><br><span class="line">    diffMat=np.tile(inX,(m, <span class="number">1</span>))-dataSet <span class="comment">#行向量方向上将inX复制m次，然后和dataSet矩阵做相减运算</span></span><br><span class="line">    sqDiffMat = diffMat**<span class="number">2</span> <span class="comment">#减完后，对每个数做平方</span></span><br><span class="line">    sqDistances = sqDiffMat.sum(axis=<span class="number">1</span>) <span class="comment">#平方后按行求和，axis=0表 示列相加，axis-1表示行相加</span></span><br><span class="line">    distances = sqDistances *<span class="number">0.5</span> <span class="comment">#开方计算出欧式距离</span></span><br><span class="line">    sortedDistIndices = distances.argsort() <span class="comment">#对距离从小到大排序，注意argsort函数返回的是数组值从小到大的索引值2 </span></span><br><span class="line">    classCount = &#123;&#125; <span class="comment">#用于类别/次数的字典，key为类别， value为次数  </span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">        voteIlabel = labels[sortedDistIndices[i]] <span class="comment">#取出第近的元素对应的类别</span></span><br><span class="line">        classCount[voteIlabel] = classCount.get(voteIlabel,<span class="number">0</span>) + <span class="number">1</span> <span class="comment">#对类别次数进行累加</span></span><br><span class="line">    sortedClassCount = sorted(classCount.items(),key=operator.itemgetter(<span class="number">1</span>),reverse=<span class="literal">True</span>) <span class="comment">#根据字典的值从大到小排序</span></span><br><span class="line">    <span class="keyword">return</span> sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]  <span class="comment">#返回次数最多的类别,即所要分类的类别</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="【练习】IRIS分类-背景"><a href="#【练习】IRIS分类-背景" class="headerlink" title="【练习】IRIS分类-背景"></a>【练习】IRIS分类-背景</h2><p>Iris数据集是常用的分类实验数据集，由Fisher, 1936收集整理。</p>
+<h3 id="数据解析"><a href="#数据解析" class="headerlink" title="数据解析"></a>数据解析</h3><p>Iris数据包含150条样本记录，分剐取自三种不同的鸢尾属植物setosa、versic010r和virginica的花朵样本，每一类各50条记录，其中每条记录有4个属性：萼片长度(sepal length)、萼片宽度sepalwidth)、花瓣长度(petal length)和花瓣宽度(petal width)。</p>
+<h3 id="【练习】准备数据数据归一化"><a href="#【练习】准备数据数据归一化" class="headerlink" title="【练习】准备数据数据归一化"></a>【练习】准备数据数据归一化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-*- coding: UTF-8 -*-   </span></span><br><span class="line"><span class="keyword">import</span> csv     <span class="comment">#用于处理csv文件  </span></span><br><span class="line"><span class="keyword">import</span> random    <span class="comment">#用于随机数  </span></span><br><span class="line"><span class="keyword">import</span> math           </span><br><span class="line"><span class="keyword">import</span> operator  <span class="comment">#  </span></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> neighbors  </span><br><span class="line"> </span><br><span class="line"><span class="comment">#加载数据集  </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadDataset</span><span class="params">(filename,split,trainingSet=[],testSet = [])</span>:</span>  </span><br><span class="line">    <span class="keyword">with</span> open(filename,<span class="string">"r"</span>) <span class="keyword">as</span> csvfile:  </span><br><span class="line">        lines = csv.reader(csvfile)  </span><br><span class="line">        dataset = list(lines)  </span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> range(len(dataset)<span class="number">-1</span>):  </span><br><span class="line">            <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">4</span>):  </span><br><span class="line">                dataset[x][y] = float(dataset[x][y])  </span><br><span class="line">            <span class="keyword">if</span> random.random()&lt;split:  </span><br><span class="line">                trainingSet.append(dataset[x])  </span><br><span class="line">            <span class="keyword">else</span>:  </span><br><span class="line">                testSet.append(dataset[y])  </span><br><span class="line"><span class="comment">#计算距离  </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">euclideanDistance</span><span class="params">(instance1,instance2,length)</span>:</span>  </span><br><span class="line">    distance = <span class="number">0</span>  </span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(length):  </span><br><span class="line">        distance += (float(instance1[x]) - float(instance2[x]))**<span class="number">2</span> </span><br><span class="line">        <span class="comment">#想了好久才意识到不是转为int类型，而是float类型</span></span><br><span class="line">    <span class="keyword">return</span> math.sqrt(distance)  </span><br><span class="line">  </span><br><span class="line"><span class="comment">#返回K个最近邻  </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getNeighbors</span><span class="params">(trainingSet,testInstance,k)</span>:</span>  </span><br><span class="line">    distances = []  </span><br><span class="line">    length = len(testInstance) <span class="number">-1</span>  </span><br><span class="line">    <span class="comment">#计算每一个测试实例到训练集实例的距离  </span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(len(trainingSet)):  </span><br><span class="line">        dist = euclideanDistance(testInstance, trainingSet[x], length)  </span><br><span class="line">        distances.append((trainingSet[x],dist))  </span><br><span class="line">    <span class="comment">#对所有的距离进行排序  </span></span><br><span class="line">    distances.sort(key=operator.itemgetter(<span class="number">1</span>))  </span><br><span class="line">    neighbors = []  </span><br><span class="line">    <span class="comment">#返回k个最近邻  </span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(k):  </span><br><span class="line">        neighbors.append(distances[x][<span class="number">0</span>])  </span><br><span class="line">    <span class="keyword">return</span> neighbors  </span><br><span class="line">  </span><br><span class="line"><span class="comment">#对k个近邻进行合并，返回value最大的key  </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getResponse</span><span class="params">(neighbors)</span>:</span>  </span><br><span class="line">    classVotes = &#123;&#125;  </span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(len(neighbors)):  </span><br><span class="line">        response = neighbors[x][<span class="number">-1</span>]  </span><br><span class="line">        <span class="keyword">if</span> response <span class="keyword">in</span> classVotes:  </span><br><span class="line">            classVotes[response]+=<span class="number">1</span>  </span><br><span class="line">        <span class="keyword">else</span>:  </span><br><span class="line">            classVotes[response] = <span class="number">1</span>  </span><br><span class="line">    <span class="comment">#排序  </span></span><br><span class="line">    sortedVotes = sorted(classVotes.items(),key = operator.itemgetter(<span class="number">1</span>),reverse =<span class="literal">True</span>)  </span><br><span class="line">    <span class="comment">#在python高版本中 iteritems 更换为items</span></span><br><span class="line">    <span class="keyword">return</span> sortedVotes[<span class="number">0</span>][<span class="number">0</span>]  </span><br><span class="line">  </span><br><span class="line"><span class="comment">#计算准确率  </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getAccuracy</span><span class="params">(testSet,predictions)</span>:</span>  </span><br><span class="line">    correct = <span class="number">0</span>  </span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(len(testSet)):  </span><br><span class="line">        <span class="keyword">if</span> testSet[x][<span class="number">-1</span>] == predictions[x]:  </span><br><span class="line">            correct+=<span class="number">1</span>  </span><br><span class="line">    <span class="keyword">return</span> (correct/float(len(testSet))) * <span class="number">100.0</span>  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span>  </span><br><span class="line">    trainingSet = []  <span class="comment">#训练数据集  </span></span><br><span class="line">    testSet = []      <span class="comment">#测试数据集  </span></span><br><span class="line">    split = <span class="number">0.67</span>      <span class="comment">#分割的比例  </span></span><br><span class="line">    loadDataset(<span class="string">r"kNN_IRIS/iris.csv"</span>, split, trainingSet, testSet)   </span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"Train set :"</span> + repr(len(trainingSet)))</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"Test set :"</span> + repr(len(testSet)))                </span><br><span class="line">      </span><br><span class="line">    predictions = []  </span><br><span class="line">    k = <span class="number">3</span>  </span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(len(testSet)):  </span><br><span class="line">        neighbors = getNeighbors(trainingSet, testSet[x], k)  </span><br><span class="line">        result = getResponse(neighbors)  </span><br><span class="line">        predictions.append(result)  </span><br><span class="line">        <span class="keyword">print</span> (<span class="string">"&gt;predicted = "</span> + repr(result) + <span class="string">",actual = "</span> + repr(testSet[x][<span class="number">-1</span>]))</span><br><span class="line">    accuracy = getAccuracy(testSet, predictions)  </span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"Accuracy:"</span> + repr(accuracy) + <span class="string">"%"</span>)  </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ ==<span class="string">"__main__"</span>:  </span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<h3 id="【练习】测试算法验证分类器"><a href="#【练习】测试算法验证分类器" class="headerlink" title="【练习】测试算法验证分类器"></a>【练习】测试算法验证分类器</h3><p>为了检验上述程序是否正确，编写一下代码，测试只需上面的代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:utf-8  </span></span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris  </span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> neighbors  </span><br><span class="line"><span class="keyword">import</span> sklearn  </span><br><span class="line"></span><br><span class="line"><span class="comment">### Start Code Here ###</span></span><br><span class="line"><span class="comment">#查看iris数据集</span></span><br><span class="line">iris = load_iris()</span><br><span class="line">print(iris)</span><br><span class="line"><span class="comment">#创建KNN模型对象</span></span><br><span class="line">knn = neighbors.KNeighborsClassifier()</span><br><span class="line"><span class="comment">#调用fit函数训练数据集  </span></span><br><span class="line">knn.fit(iris.data,iris.target)</span><br><span class="line"><span class="comment">#调用predict函数进行预测，参数为[[0.1,0.2,0.3,0.4]]</span></span><br><span class="line">predict = knn.predict([[<span class="number">0.1</span>,<span class="number">0.2</span>,<span class="number">0.3</span>,<span class="number">0.4</span>]])</span><br><span class="line"><span class="comment">### End Code Here ###</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> (predict)  </span><br><span class="line"><span class="keyword">print</span> (iris.target_names[predict])</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考文献与延伸阅读"><a href="#参考文献与延伸阅读" class="headerlink" title="参考文献与延伸阅读"></a>参考文献与延伸阅读</h2><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料:"></a>参考资料:</h3><p>1.哈林顿，李锐. 机器学习实战 : Machine learning in action[M]. 人民邮电出版社, 2013.<br>2.周志华. 机器学习:Machine learning[M]. 清华大学出版社, 2016.</p>
+<h3 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h3><p>1.李航. 统计学习方法[M]. 清华大学出版社, 2012.</p>
+<h2 id="后续实训"><a href="#后续实训" class="headerlink" title="后续实训"></a>后续实训</h2><p>基于kNN算法的实训类实验，包括：<br>　* 基于kNN的手写字识别<br>　* 基于kNN的约会网站效果判定<br>　* 基于kNN的乳腺癌分类<br>通过以上实训实验，可进一步加强对kNN理论、算法、应用等各方面知识的掌握。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%BB%83%E4%B9%A0%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -885,7 +1073,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/10/%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/10/1.%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="听闻有雨">
@@ -904,7 +1092,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/02/10/%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/" itemprop="url">基于kNN的手写字识别</a></h1>
+                <a class="post-title-link" href="/2020/02/10/1.%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/" itemprop="url">基于kNN的手写字识别</a></h1>
         
 
         <div class="post-meta">
@@ -957,8 +1145,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/02/10/%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/02/10/%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/" itemprop="commentCount"></span>
+                <a href="/2020/02/10/1.%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/02/10/1.%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -990,7 +1178,7 @@
           <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>第一次比较整体的完成机器学习实践，参考了许多网络资料。要能独立写出来还需要锻炼；python有很多细致的东西还不了解；sklearn与numpy还没有掌握。但的的确确体会到了机器学习的乐趣，期待下一次的学习 (^v^)</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/02/10/%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/#more" rel="contents">
+            <a class="btn" href="/2020/02/10/1.%E5%9F%BA%E4%BA%8EkNN%E7%9A%84%E6%89%8B%E5%86%99%E5%AD%97%E8%AF%86%E5%88%AB/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1694,7 +1882,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
